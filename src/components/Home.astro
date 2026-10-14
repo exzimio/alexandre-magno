@@ -4,6 +4,8 @@ import Masthead from './Masthead.astro';
 import Poster from './Poster.astro';
 import Games from './Games.astro';
 import DataStrip from './DataStrip.astro';
+import Background from './Background.astro';
+import Footer from './Footer.astro';
 import { day, loadGitHub } from '../data/github';
 import type { Lang } from '../data/content';
 import { products } from '../data/content';
@@ -28,6 +30,8 @@ const github = await loadGitHub();
       }
       <Games lang={lang} />
       <DataStrip lang={lang} data={github} />
+      <Background lang={lang} />
     </main>
+    <Footer lang={lang} />
   </div>
 </Base>

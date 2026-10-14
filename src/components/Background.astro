@@ -1,0 +1,70 @@
+---
+import type { Lang } from '../data/content';
+import { t } from '../data/content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const s = t[lang];
+---
+
+<section class="bg" aria-labelledby="bg-title">
+  <h2 id="bg-title">{s.background}</h2>
+  <dl>
+    <dt class="caps">{s.course}</dt>
+    <dd>{s.courseText}</dd>
+    <dt class="caps">{s.frontEnd}</dt>
+    <dd class="mono">HTML, CSS, JavaScript</dd>
+    <dt class="caps">{s.backEnd}</dt>
+    <dd class="mono">PHP, Python, MySQL, REST APIs</dd>
+    <dt class="caps">{s.sinceThen}</dt>
+    <dd>{s.sinceThenText}</dd>
+  </dl>
+</section>
+
+<style>
+  .bg {
+    padding: 56px 0;
+    display: grid;
+    gap: 28px 40px;
+    border-bottom: 2px solid var(--ink);
+  }
+  h2 {
+    font: 400 clamp(48px, 7vw, 72px) / 0.9 var(--display);
+    text-transform: uppercase;
+    margin: 0;
+  }
+  dl {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 12px 20px;
+    margin: 0;
+    max-width: 72ch;
+  }
+  dt {
+    color: var(--muted);
+    padding-top: 3px;
+  }
+  dd {
+    margin: 0;
+  }
+  dd.mono {
+    font-size: 15px;
+  }
+  @media (min-width: 821px) {
+    .bg {
+      grid-template-columns: 5fr 7fr;
+    }
+  }
+  @media (max-width: 480px) {
+    dl {
+      grid-template-columns: 1fr;
+      gap: 2px;
+    }
+    dd {
+      margin-bottom: 12px;
+    }
+  }
+</style>

@@ -1,0 +1,28 @@
+---
+import type { Lang } from '../data/content';
+import { links, t } from '../data/content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const s = t[lang];
+---
+
+<footer class="mono">
+  <p>{s.builtWith} <a href={links.source}>{s.source}</a></p>
+  <p>{s.rights}</p>
+</footer>
+
+<style>
+  footer {
+    padding: 28px 0 56px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+  p {
+    margin: 0;
+  }
+</style>
