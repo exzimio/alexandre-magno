@@ -120,7 +120,7 @@ export const alsoInProgress: Text = {
 export const links = {
   github: 'https://github.com/exzimio',
   linkedin: 'https://www.linkedin.com/in/alexandre-magno-382a813b2/',
-  source: 'https://github.com/exzimio/alexandre-magno-site',
+  source: 'https://github.com/exzimio/alexandre-magno',
 };
 
 export const t = {
