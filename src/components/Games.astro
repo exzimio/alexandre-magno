@@ -1,0 +1,172 @@
+---
+import { Picture } from 'astro:assets';
+import type { Lang } from '../data/content';
+import { gamesInDevelopment, orbita, t } from '../data/content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const s = t[lang];
+---
+
+<section class="games" aria-labelledby="g-title">
+  <p class="caps label">{s.games}</p>
+  <div class="row">
+    <div class="screen" data-game-screen>
+      <Picture
+        src={orbita.image}
+        alt={orbita.imageAlt[lang]}
+        formats={['avif', 'webp']}
+        widths={[360, 720]}
+        sizes="360px"
+        loading="lazy"
+        class="still"
+      />
+    </div>
+    <div class="copy">
+      <p class="tagline">{orbita.tagline[lang]}</p>
+      <h2 class="ptitle" id="g-title">{orbita.name}</h2>
+      <p class="deck">{orbita.deck[lang]}</p>
+      <p class="stack mono">{orbita.stack}</p>
+      <div class="actions">
+        <a class="play" href={orbita.page} data-play data-embed={orbita.embed} data-frame-title={s.gameFrameTitle}>
+          {s.play}
+        </a>
+        <a class="caps" href={orbita.page}>{s.playOnItch}</a>
+      </div>
+      <ul class="dev caps" aria-label={s.inDevelopment}>
+        {
+          gamesInDevelopment.map((game) => (
+            <li>
+              <span>{game.name}</span>
+              <span>{game.status[lang]}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+  // The embed counts as a play on itch.io and loads only on request: no third-party request
+  // happens until the visitor presses Play.
+  const play = document.querySelector<HTMLAnchorElement>('[data-play]');
+  const screen = document.querySelector<HTMLElement>('[data-game-screen]');
+
+  play?.addEventListener('click', (event) => {
+    if (!screen || !play.dataset.embed) {
+      return;
+    }
+
+    event.preventDefault();
+
+    const frame = document.createElement('iframe');
+    frame.src = play.dataset.embed;
+    frame.title = play.dataset.frameTitle ?? '';
+    frame.allow = 'autoplay; fullscreen';
+    frame.allowFullscreen = true;
+    frame.className = 'frame';
+
+    screen.replaceChildren(frame);
+    play.hidden = true;
+    frame.focus();
+  });
+</script>
+
+<style>
+  .games {
+    padding: 72px 0;
+    border-bottom: 2px solid var(--ink);
+  }
+  .label {
+    color: var(--muted);
+    margin: 0 0 28px;
+  }
+  .row {
+    display: grid;
+    gap: 40px;
+    align-items: center;
+  }
+  .screen {
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 450 / 780;
+    background: #0a0e1f;
+  }
+  .screen :global(.still) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .screen :global(.frame) {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+  .tagline {
+    font: italic 500 20px / 1.4 var(--text);
+    color: var(--muted);
+    margin: 0 0 6px;
+    max-width: 52ch;
+  }
+  .ptitle {
+    font: 400 clamp(60px, 13vw, 180px) / 0.9 var(--display);
+    text-transform: uppercase;
+    margin: 30px 0 22px;
+  }
+  .deck {
+    max-width: 58ch;
+    margin: 0 0 14px;
+    font-size: 18px;
+  }
+  .stack {
+    margin: 0 0 22px;
+    font-size: 14px;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 22px;
+    align-items: center;
+  }
+  .play {
+    display: inline-block;
+    padding: 14px 26px 12px;
+    background: var(--red);
+    color: var(--on-red);
+    text-decoration: none;
+    font: 400 24px / 1 var(--display);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .play[hidden] {
+    display: none;
+  }
+  .dev {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+    border-top: 1px solid var(--rule);
+    max-width: 520px;
+  }
+  .dev li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .dev li span:last-child {
+    color: var(--muted);
+  }
+  @media (min-width: 821px) {
+    .row {
+      grid-template-columns: 360px 1fr;
+      gap: 56px;
+    }
+  }
+</style>

@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Masthead from './Masthead.astro';
 import Poster from './Poster.astro';
+import Games from './Games.astro';
 import type { Lang } from '../data/content';
 import { products } from '../data/content';
 
@@ -17,6 +18,7 @@ const { lang } = Astro.props;
     <Masthead lang={lang} />
     <main>
       {products.map((product) => <Poster product={product} lang={lang} />)}
+      <Games lang={lang} />
     </main>
   </div>
 </Base>
