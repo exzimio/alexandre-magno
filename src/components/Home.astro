@@ -3,6 +3,8 @@ import Base from '../layouts/Base.astro';
 import Masthead from './Masthead.astro';
 import Poster from './Poster.astro';
 import Games from './Games.astro';
+import DataStrip from './DataStrip.astro';
+import { day, loadGitHub } from '../data/github';
 import type { Lang } from '../data/content';
 import { products } from '../data/content';
 
@@ -11,14 +13,21 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const github = await loadGitHub();
 ---
 
 <Base lang={lang}>
   <div class="page">
     <Masthead lang={lang} />
     <main>
-      {products.map((product) => <Poster product={product} lang={lang} />)}
+      {
+        products.map((product) => {
+          const date = github.repoLastCommit[product.repo];
+          return <Poster product={product} lang={lang} lastCommit={date ? day(date) : undefined} />;
+        })
+      }
       <Games lang={lang} />
+      <DataStrip lang={lang} data={github} />
     </main>
   </div>
 </Base>

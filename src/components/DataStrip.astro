@@ -1,0 +1,51 @@
+---
+import type { Lang } from '../data/content';
+import { t } from '../data/content';
+import type { GitHubSnapshot } from '../data/github';
+import { day } from '../data/github';
+
+interface Props {
+  lang: Lang;
+  data: GitHubSnapshot;
+}
+
+const { lang, data } = Astro.props;
+const s = t[lang];
+const passing = data.docopsCi.conclusion === 'success';
+---
+
+<aside class="data mono" aria-label="GitHub">
+  <span>{s.lastCommit} <b>{day(data.lastCommit.date)}</b> ({data.lastCommit.repo})</span>
+  <span>
+    {s.ci} <a class:list={['ci', passing ? 'ok' : 'fail']} href={data.docopsCi.url}><b>{passing ? s.passing : s.failing}</b></a>
+  </span>
+  <span>{s.tests} <b>{data.docopsTests}</b></span>
+  <span>{s.commits90} <b>{data.commits90d}</b></span>
+  <span>{s.readFrom} <b>{day(data.fetchedAt)}</b></span>
+</aside>
+
+<style>
+  .data {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 32px;
+    padding: 16px 0;
+    border-bottom: 2px solid var(--ink);
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  b {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .ci b {
+    color: inherit;
+  }
+  .ok {
+    color: var(--ok);
+  }
+  .fail {
+    color: var(--fail);
+  }
+</style>
