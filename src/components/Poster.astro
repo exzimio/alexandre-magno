@@ -64,11 +64,10 @@ const sizes = product.layout === 'wide' ? '(max-width: 1240px) 100vw, 1184px' : 
     max-width: 52ch;
   }
   .ptitle {
-    font: 400 clamp(76px, 15vw, 210px) / 0.84 var(--display);
+    font: 400 clamp(60px, 15vw, 210px) / 0.84 var(--display);
     text-transform: uppercase;
     letter-spacing: -0.01em;
     margin: 18px 0 22px;
-    overflow-wrap: anywhere;
   }
   .ptitle span {
     display: block;
@@ -113,6 +112,11 @@ const sizes = product.layout === 'wide' ? '(max-width: 1240px) 100vw, 1184px' : 
 
   /* Split: stacked title on the left, capture on the right. */
   @media (min-width: 821px) {
+    /* Half a page wide: the title is sized to its column so a word never breaks. */
+    .split .ptitle,
+    .flip .ptitle {
+      font-size: clamp(72px, 9.4vw, 128px);
+    }
     .split {
       grid-template-columns: 5fr 7fr;
       align-items: end;
