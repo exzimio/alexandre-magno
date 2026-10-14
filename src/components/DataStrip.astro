@@ -15,29 +15,51 @@ const passing = data.docopsCi.conclusion === 'success';
 ---
 
 <aside class="data mono" aria-label="GitHub">
-  <span>{s.lastCommit} <b>{day(data.lastCommit.date)}</b> ({data.lastCommit.repo})</span>
-  <span>
-    {s.ci} <a class:list={['ci', passing ? 'ok' : 'fail']} href={data.docopsCi.url}><b>{passing ? s.passing : s.failing}</b></a>
-  </span>
-  <span>{s.tests} <b>{data.docopsTests}</b></span>
-  <span>{s.commits90} <b>{data.commits90d}</b></span>
-  <span>{s.readFrom} <b>{day(data.fetchedAt)}</b></span>
+  <dl>
+    <div>
+      <dt>{s.lastCommit}</dt>
+      <dd><b>{day(data.lastCommit.date)}</b> ({data.lastCommit.repo})</dd>
+    </div>
+    <div>
+      <dt>{s.ci}</dt>
+      <dd><a class:list={['ci', passing ? 'ok' : 'fail']} href={data.docopsCi.url}><b>{passing ? s.passing : s.failing}</b></a></dd>
+    </div>
+    <div>
+      <dt>{s.tests}</dt>
+      <dd><b>{data.docopsTests}</b></dd>
+    </div>
+    <div>
+      <dt>{s.commits90}</dt>
+      <dd><b>{data.commits90d}</b></dd>
+    </div>
+    <div>
+      <dt>{s.readFrom}</dt>
+      <dd><b>{day(data.fetchedAt)}</b></dd>
+    </div>
+  </dl>
 </aside>
 
 <style>
   .data {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 32px;
     padding: 16px 0;
     border-bottom: 2px solid var(--ink);
     font-size: 13px;
     line-height: 1.5;
     color: var(--muted);
   }
+  dl {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 40px;
+    margin: 0;
+  }
+  dd {
+    margin: 2px 0 0;
+  }
   b {
     color: var(--ink);
     font-weight: 500;
+    font-size: 15px;
   }
   .ci b {
     color: inherit;
