@@ -125,6 +125,18 @@ async function fetchSnapshot(): Promise<GitHubSnapshot> {
   };
 }
 
+async function readCache(): Promise<GitHubSnapshot | undefined> {
+  try {
+    return JSON.parse(await readFile(cachePath, 'utf-8')) as GitHubSnapshot;
+  } catch {
+    return undefined;
+  }
+}
+
+function sameNumbers(a: GitHubSnapshot, b: GitHubSnapshot): boolean {
+  return JSON.stringify({ ...a, fetchedAt: '' }) === JSON.stringify({ ...b, fetchedAt: '' });
+}
+
 let pending: Promise<GitHubSnapshot> | undefined;
 
 /**
@@ -135,7 +147,14 @@ let pending: Promise<GitHubSnapshot> | undefined;
 export function loadGitHub(): Promise<GitHubSnapshot> {
   pending ??= fetchSnapshot()
     .then(async (snapshot) => {
-      await writeFile(cachePath, `${JSON.stringify(snapshot, null, 2)}\n`, 'utf-8');
+      // Rewritten only when a number changed, so a build does not dirty the repository just
+      // because the time of the reading moved.
+      const cached = await readCache();
+
+      if (!cached || !sameNumbers(cached, snapshot)) {
+        await writeFile(cachePath, `${JSON.stringify(snapshot, null, 2)}\n`, 'utf-8');
+      }
+
       return snapshot;
     })
     .catch(async (error: unknown) => {
