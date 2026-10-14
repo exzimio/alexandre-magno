@@ -8,6 +8,8 @@ Built with Astro and TypeScript as a static site. No tracking, no cookies, and i
 
 The strip with the last commit, the DocOps CI status, its test count and the commits in the last 90 days is read from the public GitHub API at build time, without a token. If the API fails or the anonymous rate limit is spent, the build uses the last reading saved in `src/data/github-cache.json` and the page shows that reading's date.
 
+A scheduled workflow (`.github/workflows/daily-rebuild.yml`) calls a Vercel deploy hook every day at 05:00 UTC, so the numbers are at most a day old.
+
 ## Running it
 
 Requires Node 22.12 or newer.
