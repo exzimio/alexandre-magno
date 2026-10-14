@@ -1,7 +1,7 @@
 ---
 import { Picture } from 'astro:assets';
 import type { Lang } from '../data/content';
-import { gamesInDevelopment, orbita, t } from '../data/content';
+import { alsoInProgress, orbita, t } from '../data/content';
 
 interface Props {
   lang: Lang;
@@ -36,16 +36,7 @@ const s = t[lang];
         </a>
         <a class="caps" href={orbita.page}>{s.playOnItch}</a>
       </div>
-      <ul class="dev caps">
-        {
-          gamesInDevelopment.map((game) => (
-            <li>
-              <span>{game.name}</span>
-              <span>{game.status[lang]}</span>
-            </li>
-          ))
-        }
-      </ul>
+      <p class="also">{alsoInProgress[lang]}</p>
     </div>
   </div>
 </section>
@@ -146,21 +137,10 @@ const s = t[lang];
   .play[hidden] {
     display: none;
   }
-  .dev {
-    list-style: none;
-    margin: 32px 0 0;
-    padding: 0;
-    border-top: 1px solid var(--rule);
-    max-width: 520px;
-  }
-  .dev li {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--rule);
-  }
-  .dev li span:last-child {
+  .also {
+    margin: 28px 0 0;
+    max-width: 58ch;
+    font-size: 15px;
     color: var(--muted);
   }
   @media (min-width: 821px) {

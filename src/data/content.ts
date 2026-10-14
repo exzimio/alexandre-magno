@@ -112,9 +112,10 @@ export const orbita = {
   embed: 'https://itch.io/embed-upload/19045274?color=0a0e1f',
 };
 
-export const gamesInDevelopment: { name: string; status: Text }[] = [
-  { name: 'Recibos Verdes', status: { en: 'Prototype', pt: 'Protótipo' } },
-];
+export const alsoInProgress: Text = {
+  en: 'Also in progress: Recibos Verdes, a satirical management game (prototype).',
+  pt: 'Também em curso: Recibos Verdes, um jogo de gestão satírico (protótipo).',
+};
 
 export const links = {
   github: 'https://github.com/exzimio',
