@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import Masthead from './Masthead.astro';
+import Poster from './Poster.astro';
+import type { Lang } from '../data/content';
+import { products } from '../data/content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<Base lang={lang}>
+  <div class="page">
+    <Masthead lang={lang} />
+    <main>
+      {products.map((product) => <Poster product={product} lang={lang} />)}
+    </main>
+  </div>
+</Base>

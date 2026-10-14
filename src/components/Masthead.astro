@@ -1,0 +1,71 @@
+---
+import type { Lang } from '../data/content';
+import { links, t } from '../data/content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const s = t[lang];
+---
+
+<header class="masthead">
+  <div class="top caps">
+    <span>{s.place}</span>
+    <a href={s.otherLang.href} hreflang={s.otherLang.href === '/' ? 'en' : 'pt-PT'} lang={s.otherLang.href === '/' ? 'en' : 'pt-PT'}>
+      <span class="visually-hidden">{s.otherLang.name}: </span>{s.otherLang.label}
+    </a>
+  </div>
+  <h1 class="name"><span>Alexandre</span><span class="red">Magno</span></h1>
+  <div class="billing">
+    <p>{s.line}</p>
+    <nav class="caps" aria-label={s.profiles}>
+      <a href={links.github}>GitHub</a>
+      <a href={links.linkedin}>LinkedIn</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .masthead {
+    padding: 40px 0 56px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+  }
+  .name {
+    font: 400 clamp(64px, 17vw, 236px) / 0.86 var(--display);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin: 34px 0 0;
+    overflow-wrap: anywhere;
+  }
+  .name span {
+    display: block;
+  }
+  .red {
+    color: var(--red);
+  }
+  .billing {
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 32px;
+    align-items: baseline;
+  }
+  .billing p {
+    margin: 0;
+    font: 400 clamp(20px, 2.4vw, 28px) / 1.2 var(--display);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    max-width: 30ch;
+  }
+  nav {
+    display: flex;
+    gap: 22px;
+  }
+</style>
