@@ -149,7 +149,7 @@ export const t = {
     background: 'Background',
     course: 'Course',
     courseText:
-      'Full stack development, CodeMaster, 2026. 300+ hours, live online classes. Final grade 17/20. Recognised by the Portuguese State under Portugal INCoDe.2030.',
+      'Full-stack development, CodeMaster, 2026. 300+ hours, live online classes. Final grade 17/20. Recognised by the Portuguese State under Portugal INCoDe.2030.',
     frontEnd: 'Front end',
     backEnd: 'Back end',
     sinceThen: 'Since then',
