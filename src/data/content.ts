@@ -3,6 +3,7 @@ import docopsTasks from '../assets/docops-tasks.png';
 import tenderosDetail from '../assets/tenderos-opportunity-detail.jpg';
 import measurexDrawing from '../assets/measurex-drawing.png';
 import orbitaStart from '../assets/orbita-start.png';
+import tunelMatch from '../assets/tunel-match.png';
 
 export type Lang = 'en' | 'pt';
 
@@ -112,6 +113,26 @@ export const orbita = {
   embed: 'https://itch.io/embed-upload/19045274?color=0a0e1f',
 };
 
+export const tunel = {
+  name: 'Do Túnel ao Relvado',
+  image: tunelMatch,
+  imageAlt: {
+    en: 'A match in Do Túnel ao Relvado: both teams on the pitch with their zones, the commentary and the lineups',
+    pt: 'Um jogo no Do Túnel ao Relvado: as duas equipas no relvado com as suas áreas, o comentário e os onzes',
+  } satisfies Text,
+  tagline: {
+    en: 'Football management with the whole Portuguese pyramid, from the Liga down to the district leagues.',
+    pt: 'Gestão de futebol com a pirâmide portuguesa inteira, da Liga aos distritais.',
+  } satisfies Text,
+  deck: {
+    en: '394 clubs, every cup and European competition, and the national team. Matches play minute by minute, with each player’s zone on the pitch. In the browser and on Android, in Portuguese.',
+    pt: '394 clubes, todas as taças e provas europeias, e a Seleção. Jogos minuto a minuto, com a área de cada jogador no relvado. No browser e em Android.',
+  } satisfies Text,
+  stack: 'TypeScript / Vite / Capacitor',
+  page: 'https://exzimio.itch.io/do-tnel-ao-relvado',
+  showcase: 'https://github.com/exzimio/do-tunel-ao-relvado-showcase',
+};
+
 export const alsoInProgress: Text = {
   en: 'Also in progress: Recibos Verdes, a satirical management game (prototype).',
   pt: 'Também em curso: Recibos Verdes, um jogo de gestão satírico (protótipo).',
@@ -128,7 +149,7 @@ export const t = {
     htmlLang: 'en',
     title: 'Alexandre Magno',
     description:
-      'Developer in Portugal. Business software for small companies, and games: DocOps, TenderOS, MeasureX and Órbita.',
+      'Developer in Portugal. Business software for small companies, and games: DocOps, TenderOS, MeasureX, Órbita and Do Túnel ao Relvado.',
     place: 'Portugal',
     profiles: 'Profiles',
     line: 'Developer in Portugal. Business software for small companies, and games.',
@@ -163,7 +184,7 @@ export const t = {
     htmlLang: 'pt-PT',
     title: 'Alexandre Magno',
     description:
-      'Programador em Portugal. Software de gestão para pequenas empresas, e jogos: DocOps, TenderOS, MeasureX e Órbita.',
+      'Programador em Portugal. Software de gestão para pequenas empresas, e jogos: DocOps, TenderOS, MeasureX, Órbita e Do Túnel ao Relvado.',
     place: 'Portugal',
     profiles: 'Perfis',
     line: 'Programador em Portugal. Software de gestão para pequenas empresas, e jogos.',

@@ -1,7 +1,7 @@
 ---
 import { Picture } from 'astro:assets';
 import type { Lang } from '../data/content';
-import { alsoInProgress, orbita, t } from '../data/content';
+import { alsoInProgress, orbita, t, tunel } from '../data/content';
 
 interface Props {
   lang: Lang;
@@ -35,6 +35,29 @@ const s = t[lang];
           {s.play}
         </a>
         <a class="caps" href={orbita.page}>{s.playOnItch}</a>
+      </div>
+    </div>
+  </div>
+  <div class="row wide">
+    <a class="screen wide" href={tunel.page}>
+      <Picture
+        src={tunel.image}
+        alt={tunel.imageAlt[lang]}
+        formats={['avif', 'webp']}
+        widths={[560, 1120]}
+        sizes="(min-width: 821px) 560px, 100vw"
+        loading="lazy"
+        class="still"
+      />
+    </a>
+    <div class="copy">
+      <p class="tagline">{tunel.tagline[lang]}</p>
+      <h2 class="ptitle small">{tunel.name}</h2>
+      <p class="deck">{tunel.deck[lang]}</p>
+      <p class="stack mono">{tunel.stack}</p>
+      <div class="actions">
+        <a class="play" href={tunel.page}>{s.playOnItch}</a>
+        <a class="caps" href={tunel.showcase}>{s.showcase}</a>
       </div>
       <p class="also">{alsoInProgress[lang]}</p>
     </div>
@@ -144,10 +167,27 @@ const s = t[lang];
     font-size: 15px;
     color: var(--muted);
   }
+  .row.wide {
+    margin-top: 72px;
+  }
+  .screen.wide {
+    display: block;
+    max-width: 560px;
+    aspect-ratio: 16 / 9;
+    background: #081214;
+  }
+  /* A five-word title cannot run at the Órbita size and still fit its column. */
+  .ptitle.small {
+    font-size: clamp(40px, 7vw, 84px);
+    line-height: 0.95;
+  }
   @media (min-width: 821px) {
     .row {
       grid-template-columns: 360px 1fr;
       gap: 56px;
+    }
+    .row.wide {
+      grid-template-columns: 560px 1fr;
     }
   }
 </style>
